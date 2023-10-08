@@ -18,8 +18,6 @@ function Cart(props) {
         if (Number(btn.value) > btn.max) {
             setQty(Number(btn.max));
         }
-        console.log(qty + " and " + btn.value)
-
         adjustQuantity(props.product.id, qty);
         if (btn.value === btn.max) {
             alert("This is the last quantity for this product");

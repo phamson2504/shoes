@@ -1,4 +1,5 @@
 import axios from "axios";
+import jwtDecode from "jwt-decode";
 
 const API_URL = "http://localhost:8080/api/auth/";
 
@@ -7,10 +8,9 @@ class AuthService {
     return axios
     .post(API_URL + "signin",{username,password})
       .then((response) => {
-        if (response.data.accessToken) {
-       localStorage.setItem("user", JSON.stringify(response.data));
+        if (response.data.token) {
+        localStorage.setItem("user", JSON.stringify(response.data));
       }
-
         return response.data;
       });
   }
@@ -22,13 +22,26 @@ class AuthService {
       password,
     });
   }
+  checkTokenExpirationMiddleware () {
+    const token =
+      JSON.parse(localStorage.getItem("user")) &&
+      JSON.parse(localStorage.getItem("user"))["token"];
+    if ( !token || jwtDecode(token).exp < Date.now() / 1000) {
+      localStorage.clear();
+      return false;
+    }
+    return true;
+  };
   
   logout = () => {
     localStorage.removeItem("user");
   };
 
   getCurrentUser = () => {
-    return JSON.parse(localStorage.getItem("user"));
+    const token =
+      JSON.parse(localStorage.getItem("user"))&&
+      JSON.parse(localStorage.getItem("user"))["token"];
+    return jwtDecode(token);
   };
 }
 

@@ -15,8 +15,6 @@ function App() {
   const [searchProduct, setSearchProduct] = useState("");
 
   const [productsData, setProductsData] = useState([]);
- 
-
    
   useEffect(() => {
       productService.getProduct().then((response)=>{
@@ -65,11 +63,12 @@ function App() {
   }
 
   const result = filteredData(productsData, selectBrand, searchProduct);
+
   return (
     <BrowserRouter>
       <Navigation searchByProduct={searchByProduct}/>
       <Routes>
-        <Route exact path="/" element={<Home clickProduct={clickProduct} result={result} />} />
+        <Route exact path="/" element={<Home clickProduct={clickProduct} result={result} allProduct={productsData}/>} />
         <Route path="/login" element={<Login/>} />
         <Route path='/cart' element={<CartLists />} />
       </Routes>

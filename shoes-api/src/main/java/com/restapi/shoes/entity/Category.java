@@ -25,6 +25,9 @@ public class Category {
 	
 	
 
+	public Category() {
+	}
+
 	public Category(int id, String nameCategory, List<Shoes> shoes) {
 		super();
 		this.id = id;

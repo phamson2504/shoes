@@ -7,14 +7,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.restapi.shoes.model.ShoesDTO;
-import com.restapi.shoes.service.ShoesDetailService;
+import com.restapi.shoes.service.ShoesDetailsService;
 
 @RestController
 @RequestMapping("/api/shoes")
 public class ShoesController {
 	
 	@Autowired
-	ShoesDetailService shoesDetailService;
+	ShoesDetailsService shoesDetailService;
 	
 	@RequestMapping({ "/allData" })
 	public List<ShoesDTO> firstPage() {

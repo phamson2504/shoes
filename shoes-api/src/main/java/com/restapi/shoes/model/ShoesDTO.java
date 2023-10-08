@@ -126,6 +126,13 @@ private int id;
 	public void setCategory(String category) {
 		this.category = category;
 	}
+
+	@Override
+	public String toString() {
+		return "ShoesDTO [id=" + id + ", img=" + img + ", title=" + title + ", star=" + star + ", reviews=" + reviews
+				+ ", prevPrice=" + prevPrice + ", newPrice=" + newPrice + ", maxQuantity=" + maxQuantity + ", company="
+				+ company + ", color=" + color + ", category=" + category + "]";
+	}
 	
 	
 }

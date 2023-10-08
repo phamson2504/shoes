@@ -1,9 +1,13 @@
 package com.restapi.shoes.entity;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity 
 public class User {
@@ -19,6 +23,9 @@ public class User {
     private String address;
     
     private String password;
+    
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	private List<Bill> bills;
 
 	public Long getId() {
 		return id;

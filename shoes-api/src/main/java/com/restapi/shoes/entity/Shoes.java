@@ -1,5 +1,8 @@
 package com.restapi.shoes.entity;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Shoes {
@@ -37,6 +41,14 @@ public class Shoes {
 	@JoinColumn(name ="id_category")
 	private Category category;
 	
+	@OneToMany(mappedBy = "shoes", cascade = CascadeType.ALL)
+	private List<BillDetail> billDetails;
+	
+	
+	
+	public Shoes() {
+	}
+
 	public Shoes(int id, String img, String title, String star, String reviews, int prevPrice, int newPrice,
 			int maxQuantity, String company, String color, Category category) {
 		super();

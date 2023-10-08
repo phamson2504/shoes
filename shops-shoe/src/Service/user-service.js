@@ -1,15 +1,14 @@
 import axios from "axios";
 import authHeader from "./auth-header";
 
-const API_URL = "http://localhost:8080/api/";
+const API_URL = "http://localhost:8080/api/checkBill/";
 
 class UserService {
-  getPublicContent() {
-    return axios.get(API_URL + "all");
+  getCheckBill(productCheck) {
+    return axios.post(API_URL + "getDetail", productCheck, { headers: authHeader() });
   }
-
-  getHelloWorld() {
-    return axios.get(API_URL + "hello", { headers: authHeader() });
+  getPayBill(userName,products) {
+    return axios.post(API_URL +"payBill/" +userName, products, { headers: authHeader() })
   }
 }
 

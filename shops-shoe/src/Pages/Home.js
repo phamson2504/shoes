@@ -1,12 +1,12 @@
 import Products from '../Products/Products';
 import Brands from '../Brand/Brands';
 
-function Home( {clickProduct, result} ) {
 
+function Home(props) {
   return (
     <>
-      <Brands handleClick={clickProduct}/>
-      <Products result={result}/>
+      <Brands handleClick={props.clickProduct}/>
+      <Products result={props.result}/>
     </>
   );
 }

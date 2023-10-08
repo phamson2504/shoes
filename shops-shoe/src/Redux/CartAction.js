@@ -1,5 +1,14 @@
 import * as actionTypes from "./CartType";
 
+export const adjustInitDataProduct = (theItems) =>{
+  return{
+    type: actionTypes.ADJUST_INIT_ITEMS,
+    payload: {
+      items: theItems
+    },
+  };
+};
+
 export const addToCart = (event, theItem, itemID) => {
   event.preventDefault();
   return {
