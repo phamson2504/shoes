@@ -8,6 +8,7 @@ import userService from '../Service/user-service';
 import authService from '../Service/auth-service';
 import { useNavigate } from 'react-router-dom';
 import { adjustInitDataProduct } from "../Redux/CartAction";
+import Swal from "sweetalert2";
 
 function CartLists(props) {
 
@@ -32,19 +33,28 @@ function CartLists(props) {
       navigate("/login");
     } else {
       const listProducts = [];
-      for (let i = 0 ; i < cart.length; i++) {
+      for (let i = 0; i < cart.length; i++) {
         listProducts.push({ id: cart[i].id, qty: cart[i].qty });
       }
       userService.getCheckBill(listProducts).then((response) => {
-        if(response.data.length > 0){
+        if (response.data.length > 0) {
           adjustInitDataProduct(response.data);
-        }else{
+        } else {
           const userName = authService.getCurrentUser().sub
           console.log(userName)
-          userService.getPayBill(userName,listProducts).then(() =>{
-          navigate("/");  
-          window.location.reload();
-          },error => {
+          userService.getPayBill(userName, listProducts).then(() => {
+            // navigate("/");  
+            // window.location.reload();
+            Swal.fire({
+              title: "Success",
+              text: "Alert successful",
+              icon: "success",
+              confirmButtonText: "OK",
+            }).then(function () {
+              navigate("/");
+              window.location.reload();
+            });
+          }, error => {
             alert(error.toString)
           })
         }
@@ -110,7 +120,7 @@ const mapStateToProps = (state) => {
 };
 const mapDispatchToProps = (dispatch) => {
   return {
-      adjustInitDataProduct: (theItems) => dispatch(adjustInitDataProduct(theItems)),
+    adjustInitDataProduct: (theItems) => dispatch(adjustInitDataProduct(theItems)),
   };
 };
-export default connect(mapStateToProps,mapDispatchToProps)(CartLists);
+export default connect(mapStateToProps, mapDispatchToProps)(CartLists);
